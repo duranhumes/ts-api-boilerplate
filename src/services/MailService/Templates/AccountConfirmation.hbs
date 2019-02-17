@@ -1,0 +1,64 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta charset="utf-8"> <!-- utf-8 works for most cases -->
+    <meta name="viewport" content="width=device-width"> <!-- Forcing initial-scale shouldn't be necessary -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Use the latest (edge) version of IE rendering engine -->
+    <title>Thank you for signing up {{ userName }}!</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            min-width: 100% !important;
+        }
+
+        .content {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        /*
+            Fix for Apple Mail
+        */
+        @media only screen and (min-width: 601px) {
+            .content {
+                width: 600px !important;
+            }
+        }
+    </style>
+</head>
+
+<body yahoo bgcolor="#fff">
+    <table width="100%" bgcolor="#fff" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>
+                <!--
+                        Support for Outlook and Locus
+                    -->
+                <!--[if (gte mso 9)|(IE)]>
+                    <table width="600" align="left" cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                            <td>
+                    <![endif]-->
+                <table class="content" align="left" cellpadding="0" cellspacing="0" border="0">
+                    <tbody>
+                        <p>Hey {{ userName }},</p>
+
+                        <p>Please <a href="{{ confirmLink }}" target="_blank" rel="noopener">click here</a> to confirm
+                            your
+                            account. Thank you!</p>
+                    </tbody>
+                </table>
+                <!--[if (gte mso 9)|(IE)]>
+                           </td>
+                       </tr>
+                    </table>
+                    <![endif]-->
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

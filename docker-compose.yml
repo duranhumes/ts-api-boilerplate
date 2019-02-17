@@ -1,0 +1,66 @@
+version: '3.5'
+services:
+    mysql:
+        container_name: mysql
+        image: 'mariadb:10.4'
+        restart: unless-stopped
+        volumes:
+            - ./data/mysql:/var/lib/mysql
+            - ./mysql:/etc/mysql/conf.d
+        environment:
+            TZ: America/New_York
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PORT: ${MYSQL_PORT}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        ports:
+            - '${MYSQL_PORT}:3306'
+        networks:
+            boilerplate-network:
+                aliases:
+                    - mysql
+    redis:
+        container_name: redis
+        image: redis:5
+        restart: unless-stopped
+        volumes:
+            - ./data/redis:/var/log/redis
+        ports:
+            - '${REDIS_PORT}:6379'
+        sysctls:
+            net.core.somaxconn: 4096
+        command: redis-server --requirepass ${REDIS_PASSWORD}
+        networks:
+            boilerplate-network:
+                aliases:
+                    - redis
+    api:
+        container_name: api
+        restart: unless-stopped
+        build: .
+        env_file:
+            - ./.env
+        environment:
+            TZ: America/New_York
+            WAIT_BEFORE_HOSTS: 60
+            WAIT_HOSTS: mysql:${MYSQL_PORT}, redis:${REDIS_PORT}
+        volumes:
+            - .:/usr/src/app
+            - /usr/src/app/node_modules/
+        ports:
+            - '${APP_PORT}:8000'
+        depends_on:
+            - mysql
+            - redis
+        links:
+            - mysql
+            - redis
+        networks:
+            boilerplate-network:
+                aliases:
+                    - api
+
+networks:
+    boilerplate-network:
+        driver: bridge
