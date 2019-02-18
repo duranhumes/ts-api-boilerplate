@@ -1,6 +1,1 @@
-export default [
-    'userName',
-    'email',
-    'password',
-    'isConfirmed',
-]
+export default ['userName', 'email', 'password', 'isConfirmed']

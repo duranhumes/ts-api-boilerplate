@@ -4,8 +4,8 @@ import {
     Connection,
     getManager,
 } from 'typeorm'
-import { normalize, resolve, join } from 'path'
 import { writeFileSync } from 'fs'
+import { normalize, resolve, join } from 'path'
 
 import logging, { consoleLog } from './utils/logging'
 
@@ -60,10 +60,9 @@ export async function genModelSchemas() {
             )
 
             const keys = objKeys.map((k: string) => `\n    '${k}'`)
-            const template =
-                !objKeys || objKeys.length === 0
-                    ? 'export default []\n'
-                    : `export default [${keys},\n]\n`
+            const template = !objKeys
+                ? 'export default []\n'
+                : `export default [${keys},\n]\n`
 
             const fileName =
                 entity.name.charAt(0).toUpperCase() +

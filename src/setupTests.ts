@@ -1,6 +1,7 @@
 import 'reflect-metadata'
 import 'dotenv-safe/config'
 import * as request from 'supertest'
+
 import config from './config'
 
 jest.spyOn(process, 'exit').mockImplementation()
