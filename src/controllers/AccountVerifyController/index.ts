@@ -39,6 +39,15 @@ class Controller {
             return res.status(404).json(httpMessages.code404())
         }
 
+        if (user.isConfirmed) {
+            res.set('Content-Type', 'text/html')
+            return res.send(
+                new Buffer(
+                    '<p>Your account has already been verified, you can now close this window.</p>'
+                )
+            )
+        }
+
         const [, err] = await promiseWrapper(
             this.userRepo.update(user, { isConfirmed: 1 })
         )
