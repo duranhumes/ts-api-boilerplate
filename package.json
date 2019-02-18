@@ -19,7 +19,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-push": "yarn test && yarn prettier && yarn lint:fix && git push"
+            "pre-push": "yarn test && yarn prettier && yarn lint:fix"
         }
     },
     "dependencies": {
