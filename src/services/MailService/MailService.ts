@@ -1,17 +1,17 @@
 import { createTransport, Transporter, TransportOptions } from 'nodemailer'
 
 import {
+    emailTemplates,
+    MailTemplatesOpts,
+    IMailTemplate,
+} from './EmailTemplates'
+import {
     IMailGunMailCredentials,
     IBasicMailCredentials,
     IOAuth2MailCredentials,
 } from './MailCredentialsService'
 import logging from '../../utils/logging'
 import { formattedUUID } from '../../utils'
-import {
-    emailTemplates,
-    MailTemplatesOpts,
-    IMailTemplate,
-} from './EmailTemplates'
 
 interface IMail extends IMailTemplate {
     to: string
@@ -26,14 +26,11 @@ interface ITemplateMail {
     }
 }
 
-type Stub = 'Stub' & TransportOptions
-
 export type Credentials =
     | IMailGunMailCredentials
     | IBasicMailCredentials
     | IOAuth2MailCredentials
     | TransportOptions
-    | Stub
 
 export class MailService {
     transporter: Transporter
@@ -57,6 +54,7 @@ export class MailService {
         const email = String(process.env.EMAIL_FROM)
             .split('<')[1]
             .split('>')[0]
+
         return {
             ...mail,
             generateTextFromHTML: true,
