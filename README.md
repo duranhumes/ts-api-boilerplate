@@ -14,8 +14,8 @@ Node.js, npm, npx, Docker, and docker-compose. Create a `.env` file and copy the
 
 A step by step series of examples that tell you how to get a development env running
 
-* Run `yarn` / `npm i` in the base directory to install deps.
-* Then run `yarn start` / `npm start` to start the app.
+* Run `yarn` in the base directory to install deps.
+* Then run `yarn start` to start the app.
 * done.
 
 There are a few endpoints *see* `src/server.ts`
