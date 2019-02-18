@@ -1,16 +1,15 @@
-import { normalize, resolve, join } from 'path'
-import { readdirSync, unlinkSync, writeFileSync } from 'fs'
 import {
     createConnection,
     ConnectionOptions,
     Connection,
     getManager,
 } from 'typeorm'
+import { normalize, resolve, join } from 'path'
+import { writeFileSync } from 'fs'
 
 import logging, { consoleLog } from './utils/logging'
-import { isEmpty } from './utils'
 
-const projectDirBasePath = normalize(resolve(__dirname, '..'))
+const basePath = normalize(resolve(__dirname, '..'))
 
 let connection: Connection
 
@@ -47,17 +46,8 @@ export async function closeDatabaseConnection() {
 }
 
 export async function genModelSchemas() {
-    const schemasDir = normalize(
-        join(resolve(projectDirBasePath), 'src/schemas')
-    )
+    const schemasDir = normalize(join(resolve(basePath), 'src/schemas'))
     try {
-        // Clear schema dir of old files
-        const files = readdirSync(schemasDir)
-        for (const file of files) {
-            const filePath = normalize(join(schemasDir, file))
-            unlinkSync(filePath)
-        }
-
         // Gen new files
         const entities = connection.entityMetadatas
         for (const entity of entities) {
@@ -69,22 +59,18 @@ export async function genModelSchemas() {
                 (k: string) => !keysToExclude.includes(k)
             )
 
-            if (!objKeys || isEmpty(objKeys)) return
-
             const keys = objKeys.map((k: string) => `\n    '${k}'`)
-            const template = `export default [${keys},\n]\n`
+            const template =
+                !objKeys || objKeys.length === 0
+                    ? 'export default []\n'
+                    : `export default [${keys},\n]\n`
 
             const fileName =
                 entity.name.charAt(0).toUpperCase() +
                 entity.name.slice(1).replace('Entity', 'Schema')
             const schemaFile = `${schemasDir}/${fileName}.ts`
-            try {
-                writeFileSync(schemaFile, template)
-            } catch (err) {
-                consoleLog('%s', err.toString())
 
-                process.exit(0)
-            }
+            writeFileSync(schemaFile, template)
         }
 
         consoleLog('Entity schemas created!')

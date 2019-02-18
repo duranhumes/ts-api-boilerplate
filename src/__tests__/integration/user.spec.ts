@@ -6,18 +6,17 @@ import {
     openDatabaseConnection,
     closeDatabaseConnection,
 } from '../../database'
-import config from '../../config'
-import { r } from '../../setupTests'
 import { promiseWrapper } from '../../utils'
 import { decrypt } from '../../utils/encrypt'
+import { r, testConfig } from '../../setupTests'
 import { UserRepository } from '../../repositories'
 import bootstrap, { closeServer } from '../../bootstrap'
 import { createSession, deleteSession } from '../utils'
 
 let userRepo: UserRepository
 beforeAll(async () => {
-    await bootstrap(config.testing)
-    await openDatabaseConnection(config.testing.db)
+    await bootstrap(testConfig)
+    await openDatabaseConnection(testConfig.db)
     await clearDatabaseTables()
 
     userRepo = new UserRepository()

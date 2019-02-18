@@ -6,7 +6,6 @@ import * as express from 'express'
 import * as passport from 'passport'
 import * as compression from 'compression'
 
-import controllers from './controllers'
 import {
     noRoute,
     gateway,
@@ -16,6 +15,7 @@ import {
     redisSession,
     passportConfig,
 } from './middleware'
+import controllers from './controllers'
 
 morgan.token('id', req => req.ip)
 const loggerFormat = ':id [:date[web]] ":method :url" :status :response-time'

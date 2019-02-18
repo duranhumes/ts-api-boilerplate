@@ -5,7 +5,7 @@ import {
     closeDatabaseConnection,
     clearDatabaseTables,
 } from '../../database'
-import config from '../../config'
+import { testConfig } from '../../setupTests'
 import { UserRepository } from '../../repositories'
 import { UserService, MailService, MailTemplatesOpts } from '../../services'
 
@@ -19,7 +19,7 @@ const user = {
 
 let userRepo: UserRepository
 beforeAll(async () => {
-    await openDatabaseConnection(config.testing.db)
+    await openDatabaseConnection(testConfig.db)
     await clearDatabaseTables()
 
     userRepo = new UserRepository()

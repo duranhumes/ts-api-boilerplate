@@ -11,7 +11,7 @@ const mySQLPassword = getPassword(String(process.env.MYSQL_PASSWORD))
 const defaultDBOpts: ConnectionOptions = {
     type: 'mysql',
     maxQueryExecutionTime: 800,
-    entities: ['src/entities/*.ts'],
+    entities: [`${__dirname}/entities/*`],
     synchronize: true,
     ...mySQLPassword,
 }
@@ -23,14 +23,14 @@ export default {
         enable_offline_queue: false,
         ...redisPassword,
     },
-    prod: {
+    production: {
         db: {
             ...defaultDBOpts,
             logging: false,
             host: String(process.env.MYSQL_HOST),
             port: Number(process.env.MYSQL_PORT),
             username: String(process.env.MYSQL_USER),
-            database: String(process.env.MYSQL_DATABASE_PROD),
+            database: String(process.env.MYSQL_DATABASE),
         },
     },
     development: {
@@ -43,7 +43,7 @@ export default {
             database: String(process.env.MYSQL_DATABASE),
         },
     },
-    testing: {
+    test: {
         db: {
             ...defaultDBOpts,
             logging: false,

@@ -1,8 +1,6 @@
 FROM node:11.9.0-alpine
 
 # Declare variables
-ARG APP_PORT
-ENV APP_PORT=$APP_PORT
 ENV DIR /usr/src/app
 ENV HOME /home/$USER
 ENV USER node

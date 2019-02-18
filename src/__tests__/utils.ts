@@ -1,11 +1,12 @@
 import { SuperAgent } from 'superagent'
 
-interface Login {
-    email: string
-    password: string
-}
-
-export async function createSession(r: SuperAgent<any>, data: Login) {
+export async function createSession(
+    r: SuperAgent<any>,
+    data: {
+        email: string
+        password: string
+    }
+) {
     const response = await r
         .post('/login')
         .set('Content-Type', 'application/json')

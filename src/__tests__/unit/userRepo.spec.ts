@@ -6,14 +6,14 @@ import {
     closeDatabaseConnection,
     clearDatabaseTables,
 } from '../../database'
-import config from '../../config'
+import { testConfig } from '../../setupTests'
 import { promiseWrapper } from '../../utils'
 import { UserRepository } from '../../repositories'
 import { decrypt, encrypt } from '../../utils/encrypt'
 
 let userRepo: UserRepository
 beforeAll(async () => {
-    await openDatabaseConnection(config.testing.db)
+    await openDatabaseConnection(testConfig.db)
     await clearDatabaseTables()
 
     userRepo = new UserRepository()
