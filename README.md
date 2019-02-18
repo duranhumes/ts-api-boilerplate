@@ -6,17 +6,17 @@ This was built mainly as a boilerplate but I also explored other things like enc
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisites
+## Prerequisites
 
 Node.js, npm, npx, Docker, and docker-compose. Create a `.env` file and copy the template from `.env.example` and fill in all of the variables.
 
-### Installing
+## Installing
 
 A step by step series of examples that tell you how to get a development env running
 
-Run `yarn` / `npm i` in the base directory to install deps.
-Then run `yarn start` / `npm start` to start the app.
-done.
+* Run `yarn` / `npm i` in the base directory to install deps.
+* Then run `yarn start` / `npm start` to start the app.
+* done.
 
 There are a few endpoints *see* `src/server.ts`
 
@@ -39,8 +39,8 @@ There are a few endpoints *see* `src/server.ts`
 
 ## Running the tests
 
-Run `yarn test` for basic tests
-Run `yarn test:cov` for tests with coverage
+* Run `yarn test` for basic tests
+* Run `yarn test:cov` for tests with coverage
 
 ## Deployment
 
