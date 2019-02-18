@@ -6,7 +6,7 @@ import { formatValidationError } from '../helpers'
 
 export const validationRules = {
     verify: [
-        query('key')
+        query('token')
             .not()
             .isEmpty()
             .withMessage('is required')
