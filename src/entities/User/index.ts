@@ -13,12 +13,15 @@ import { decrypt } from '../../utils/encrypt'
 import { validateUserBeforeInsert, validateUserBeforeUpdate } from './functions'
 
 export const passwordRegex = new RegExp(
-    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,30}$/,
+    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,32}$/,
     'i'
 )
 export const passwordValidationMessage =
     'A valid password consists of atleast 1 uppercase letter, 1 special character, 1 number, and is between 8 - 30 characters long.'
-
+export const userIdRegex = new RegExp(
+    /^((?=.*[a-zA-Z])(?=.*[a-zA-Z0-9])([a-zA-Z0-9]){32})/,
+    'i'
+)
 @Entity('users')
 export class UserEntity extends BaseEntity {
     @Column({ type: 'varchar', length: 255, unique: true, nullable: false })

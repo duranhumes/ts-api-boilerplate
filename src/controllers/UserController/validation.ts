@@ -1,10 +1,14 @@
 import { Request, Response, NextFunction } from 'express'
 import { validationResult, body, param } from 'express-validator/check'
 
+import {
+    userIdRegex,
+    passwordRegex,
+    passwordValidationMessage,
+} from '../../entities'
 import UserSchema from '../../schemas/UserSchema'
 import { code422 } from '../../utils/httpMessages'
 import { formatValidationError } from '../helpers'
-import { passwordRegex, passwordValidationMessage } from '../../entities'
 
 export const validationRules = {
     createUser: [
@@ -44,7 +48,8 @@ export const validationRules = {
             .withMessage('is required for this endpoint')
             .trim()
             .escape()
-            .matches(/[^a-z0-9]/gi)
+            .matches(userIdRegex)
+            .isLength({ min: 32, max: 32 })
             .withMessage('is not a valid id'),
     ],
     updateUser: [
@@ -59,7 +64,8 @@ export const validationRules = {
             .withMessage('is required for this endpoint')
             .trim()
             .escape()
-            .matches(/[^a-z0-9]/gi)
+            .matches(userIdRegex)
+            .isLength({ min: 32, max: 32 })
             .withMessage('is not a valid id'),
         body('email')
             .optional()
@@ -82,7 +88,8 @@ export const validationRules = {
             .withMessage('is required for this endpoint')
             .trim()
             .escape()
-            .matches(/[^a-z0-9]/gi)
+            .matches(userIdRegex)
+            .isLength({ min: 32, max: 32 })
             .withMessage('is not a valid id'),
     ],
 }
