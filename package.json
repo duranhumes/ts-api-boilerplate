@@ -39,7 +39,7 @@
         "googleapis": "37.2.0",
         "helmet": "3.15.1",
         "hpp": "0.2.2",
-        "jest": "23.0.0",
+        "jest": "24.1.0",
         "jsonwebtoken": "8.4.0",
         "nodemailer": "5.1.1",
         "nodemailer-mailgun-transport": "1.4.0",
@@ -50,7 +50,6 @@
         "redis": "2.8.0",
         "reflect-metadata": "0.1.13",
         "shelljs": "^0.8.3",
-        "sqlstring": "^2.3.1",
         "supertest": "3.4.2",
         "typeorm": "0.2.8",
         "uuid": "3.3.2"
@@ -68,7 +67,7 @@
         "@types/express-session": "1.15.12",
         "@types/helmet": "0.0.42",
         "@types/hpp": "0.2.1",
-        "@types/jest": "24.0.5",
+        "@types/jest": "24.0.6",
         "@types/jsonwebtoken": "8.3.0",
         "@types/morgan": "1.7.35",
         "@types/moxios": "0.4.8",
@@ -86,9 +85,9 @@
         "morgan": "1.9.1",
         "mysql2": "1.6.5",
         "nodemon": "1.18.10",
-        "pm2": "3.2.9",
+        "pm2": "3.3.1",
         "prettier": "1.16.4",
-        "ts-jest": "23.10.5",
+        "ts-jest": "24.0.0",
         "ts-node": "8.0.2",
         "tslint": "5.12.1",
         "tslint-config-airbnb": "5.11.1",
@@ -101,7 +100,9 @@
         "transform": {
             "^.+\\.ts?$": "ts-jest"
         },
-        "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.ts",
+        "setupFilesAfterEnv": [
+            "<rootDir>/src/setupTests.ts"
+        ],
         "testEnvironment": "node",
         "testRegex": "/__tests__/.*\\.(test|spec)\\.(js?|ts?)$",
         "moduleFileExtensions": [

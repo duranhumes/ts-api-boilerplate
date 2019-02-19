@@ -2,7 +2,6 @@ import * as uuid from 'uuid/v4'
 import { Request } from 'express'
 import { format, parse } from 'url'
 import * as escape from 'escape-html'
-import * as sqlstring from 'sqlstring'
 
 /**
  * Check if object is plain or has extra properties
@@ -155,7 +154,7 @@ export function upperCaseFirstLetter(str: string) {
  * @returns string
  */
 export function escapeString(str: string) {
-    return escape(sqlstring.escape(String(str)))
+    return escape(str)
         .replace(/\s+/g, ' ')
         .trim()
 }
