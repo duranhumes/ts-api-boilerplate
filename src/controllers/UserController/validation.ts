@@ -41,9 +41,11 @@ export const validationRules = {
         param('id')
             .not()
             .isEmpty()
+            .withMessage('is required for this endpoint')
             .trim()
             .escape()
-            .withMessage('is required for this endpoint'),
+            .matches(/[^a-z0-9]/gi)
+            .withMessage('is not a valid id'),
     ],
     updateUser: [
         ...UserSchema.map((field: string) =>
@@ -54,9 +56,11 @@ export const validationRules = {
         param('id')
             .not()
             .isEmpty()
+            .withMessage('is required for this endpoint')
             .trim()
             .escape()
-            .withMessage('is required for this endpoint'),
+            .matches(/[^a-z0-9]/gi)
+            .withMessage('is not a valid id'),
         body('email')
             .optional()
             .trim()
@@ -75,9 +79,11 @@ export const validationRules = {
         param('id')
             .not()
             .isEmpty()
+            .withMessage('is required for this endpoint')
             .trim()
             .escape()
-            .withMessage('is required for this endpoint'),
+            .matches(/[^a-z0-9]/gi)
+            .withMessage('is not a valid id'),
     ],
 }
 

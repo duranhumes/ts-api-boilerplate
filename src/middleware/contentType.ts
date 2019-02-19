@@ -7,7 +7,8 @@ export const contentType = (
 ) => {
     const type = req.headers['content-type']
     if (req.method !== 'GET') {
-        const allowedContentTypes = ['application/json', 'multipart/form-data']
+        const allowedContentTypes = ['application/json']
+        const contentTypesStr = allowedContentTypes.join(', ').slice(0, -1)
         const contentTypeMatches = type
             ? allowedContentTypes.filter(s => type.toLowerCase().includes(s))
             : []
@@ -15,9 +16,7 @@ export const contentType = (
             return res.status(406).json({
                 status: 406,
                 error: 'Bad Content-Type Header',
-                message: `This API only accepts ${allowedContentTypes.join(
-                    ', '
-                )} content types for everything except GET requests.`,
+                message: `This API only accepts ${contentTypesStr} content types for everything except GET requests.`,
             })
         }
     }
