@@ -21,3 +21,5 @@ temp/
 **/temp
 coverage/
 **/coverage
+keys/
+**/keys

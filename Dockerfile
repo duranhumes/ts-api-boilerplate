@@ -10,7 +10,7 @@ ENV TZ=America/New_York
 RUN apk update && apk --no-cache add \
     --virtual native-deps g++ gcc libgcc tzdata \
     libstdc++ linux-headers make python build-base \
-    && npm install --global --quiet node-gyp \
+    openssl && npm install --global --quiet node-gyp \
     npm@latest yarn@latest typescript@latest
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -38,4 +38,4 @@ USER root
 ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.5.0/wait /wait
 RUN chmod +x /wait
 
-CMD /wait && yarn start
+CMD /wait && yarn gen:keys && yarn start

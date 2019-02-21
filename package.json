@@ -15,7 +15,8 @@
         "docker": "docker-compose up -d --remove-orphans",
         "lint": "npx tslint --project tsconfig.json",
         "lint:fix": "npx tslint --project tsconfig.json --fix",
-        "prettier": "npx prettier --write '**/*.{ts,js,json}'"
+        "prettier": "npx prettier --write '**/*.{ts,js,json}'",
+        "gen:keys": "npx rimraf keys/* && openssl genrsa -out keys/private.pem 2048 && openssl rsa -in keys/private.pem -outform PEM -pubout -out keys/public.pem"
     },
     "husky": {
         "hooks": {
