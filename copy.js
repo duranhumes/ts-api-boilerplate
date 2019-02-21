@@ -3,12 +3,12 @@
  * just building ts files, so we'll copy the email templates.
  */
 
-const shell = require('shelljs')
-const { normalize, resolve } = require('path')
+const { cp } = require('shelljs')
+const { normalize } = require('path')
 
-const basePath = normalize(resolve(__dirname))
+const basePath = normalize(__dirname)
 
 const tsSrc = `${basePath}/src/services/MailService/Templates`
 const buildSrc = `${basePath}/build/services/MailService`
 
-shell.cp('-r', tsSrc, buildSrc)
+cp('-r', tsSrc, buildSrc)
