@@ -7,6 +7,7 @@ import {
 import { writeFileSync } from 'fs'
 import { normalize, resolve, join } from 'path'
 
+import { upperCaseFirstLetter } from './utils'
 import logging, { consoleLog } from './utils/logging'
 
 const basePath = normalize(resolve(__dirname, '..'))
@@ -64,9 +65,10 @@ export async function genModelSchemas() {
                 ? 'export default []\n'
                 : `export default [${keys},\n]\n`
 
-            const fileName =
-                entity.name.charAt(0).toUpperCase() +
-                entity.name.slice(1).replace('Entity', 'Schema')
+            const fileName = upperCaseFirstLetter(entity.name).replace(
+                'Entity',
+                'Schema'
+            )
             const schemaFile = `${schemasDir}/${fileName}.ts`
 
             writeFileSync(schemaFile, template)
@@ -93,7 +95,7 @@ export async function clearDatabaseTables() {
             try {
                 await repository.query(query)
             } catch (err) {
-                // console.log(err)
+                //
             }
         }
 
