@@ -6,6 +6,7 @@ import {
     openDatabaseConnection,
     closeDatabaseConnection,
 } from '../../database'
+import { deleteSession } from '../utils'
 import { r, testConfig } from '../../setupTests'
 import { UserRepository } from '../../repositories'
 import bootstrap, { closeServer } from '../../bootstrap'
@@ -56,6 +57,8 @@ describe('Login Integration', () => {
             .post('/login')
             .set('Content-Type', 'application/json')
             .send(userObj)
+
+        await deleteSession(r, response.header['set-cookie'][0])
 
         expect(response.status).toBe(200)
         expect(response.header['set-cookie']).toHaveLength(1)

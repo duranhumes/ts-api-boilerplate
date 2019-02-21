@@ -10,8 +10,8 @@ import { promiseWrapper } from '../../utils'
 import { decrypt } from '../../utils/encrypt'
 import { r, testConfig } from '../../setupTests'
 import { UserRepository } from '../../repositories'
-import bootstrap, { closeServer } from '../../bootstrap'
 import { createSession, deleteSession } from '../utils'
+import bootstrap, { closeServer } from '../../bootstrap'
 
 let userRepo: UserRepository
 beforeAll(async () => {
@@ -133,8 +133,6 @@ describe('User Integration', () => {
             .delete(`/users/${id}`)
             .set('Content-Type', 'application/json')
             .set('cookie', cookie)
-
-        await deleteSession(r, cookie)
 
         expect(response.status).toBe(204)
         expect(response.body.data).toBeFalsy()
