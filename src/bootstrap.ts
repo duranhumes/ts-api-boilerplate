@@ -1,5 +1,4 @@
 import { createServer } from 'http'
-import { statSync, mkdirSync } from 'fs'
 import { normalize, join, resolve } from 'path'
 
 import {
@@ -8,6 +7,7 @@ import {
     genModelSchemas,
 } from './database'
 import { redisClient } from './redis'
+import { createDirIfNotExists } from './utils'
 import logging, { consoleLog } from './utils/logging'
 
 const appName = process.env.APP_NAME
@@ -18,11 +18,7 @@ consoleLog('Booting %s', appName)
 let httpServer = createServer()
 async function main(config: any) {
     const logsDir = normalize(join(resolve(__dirname, '..'), 'logs'))
-    try {
-        statSync(logsDir)
-    } catch (e) {
-        mkdirSync(logsDir)
-    }
+    createDirIfNotExists(logsDir)
 
     await openDatabaseConnection(config.db)
     await genModelSchemas()

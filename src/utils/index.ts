@@ -2,6 +2,7 @@ import * as uuid from 'uuid/v4'
 import { Request } from 'express'
 import { format, parse } from 'url'
 import * as escape from 'escape-html'
+import { existsSync, mkdirSync } from 'fs'
 
 /**
  * Check if object is plain or has extra properties
@@ -144,6 +145,10 @@ export function upperCaseFirstLetter(str: string) {
     const s = String(str)
 
     return s.charAt(0).toUpperCase() + s.slice(1)
+}
+
+export function createDirIfNotExists(dir: string) {
+    return !existsSync(dir) ? mkdirSync(dir) : undefined
 }
 
 /**
