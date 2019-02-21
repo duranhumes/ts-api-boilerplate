@@ -8,14 +8,14 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Prerequisites
 
-Node.js, npm, npx, Docker, and docker-compose. Create a `.env` file and copy the template from `.env.example` and fill in all of the variables.
+Node.js, npm, npx, Docker, docker-compose, and openssl for jwt key generation. Create a `.env` file and copy the template from `.env.example` and fill in all of the variables.
 
 ## Installing
 
 A step by step series of examples that tell you how to get a development env running
 
 * Run `yarn` in the base directory to install deps.
-* Then run `yarn start` to start the app.
+* Run `yarn gen:keys` and then `yarn start` to run the app.
 * done.
 
 There are a few endpoints *see* `src/server.ts`
